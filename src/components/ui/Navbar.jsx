@@ -15,23 +15,24 @@ const Navbar = ({ onGetStarted }) => {
   }, []);
 
   const navItems = [
-    { label: 'Features', href: '#features' },
-    { label: 'Inventory', href: '#inventory' },
-    { label: 'Financing', href: '#financing' },
-    { label: 'About', href: '#about' },
-    { label: 'Contact', href: '#contact' }
+    { label: 'Home', href: '#home', icon: '🏠' },
+    { label: 'Features', href: '#features', icon: '⭐' },
+    { label: 'Cars', href: '#inventory', icon: '🚗' },
+    { label: 'Financing', href: '#financing', icon: '💳' },
+    { label: 'About', href: '#about', icon: 'ℹ️' }
   ];
 
   return (
     <>
-      <nav className={`w-full bg-gray-900/80 backdrop-blur-md border-b transition-all duration-300 sticky top-0 z-50 ${
+      
+      <nav className={`hidden md:block w-full bg-gray-900/80 backdrop-blur-md border-b transition-all duration-300 sticky top-0 z-50 ${
         isScrolled 
           ? 'bg-gray-900/95 backdrop-blur-lg border-white/10 shadow-2xl' 
           : 'bg-gray-900/80 backdrop-blur-md border-white/5'
       }`}>
         <div className="max-w-7xl mx-auto py-3 sm:py-4 px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center">
-            {/* Logo */}
+            
             <div className="flex items-center group cursor-pointer">
               <div className="w-8 h-8 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-lg flex items-center justify-center mr-3 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                 <span className="text-white font-bold text-sm">AE</span>
@@ -41,9 +42,9 @@ const Navbar = ({ onGetStarted }) => {
               </span>
             </div>
 
-            {/* Desktop Menu */}
-            <div className="hidden md:flex items-center space-x-1">
-              {navItems.map((item, index) => (
+            
+            <div className="flex items-center space-x-1">
+              {navItems.map((item) => (
                 <a
                   key={item.label}
                   href={item.href}
@@ -55,8 +56,8 @@ const Navbar = ({ onGetStarted }) => {
               ))}
             </div>
 
-            {/* Desktop CTA */}
-            <div className="hidden md:block">
+            
+            <div>
               <PrimaryButton 
                 label="Get Started" 
                 onClick={onGetStarted}
@@ -64,69 +65,82 @@ const Navbar = ({ onGetStarted }) => {
                 className="hover:shadow-cyan-500/25"
               />
             </div>
-
-            {/* Mobile Menu Button */}
-            <button 
-              className="md:hidden text-gray-300 hover:text-white transition-all duration-300 p-2 rounded-lg hover:bg-white/5"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-label="Toggle menu"
-            >
-              <div className="w-6 h-6 flex flex-col justify-center space-y-1.5">
-                <div className={`w-6 h-0.5 bg-current transition-all duration-300 ${
-                  isMenuOpen ? 'rotate-45 translate-y-2' : ''
-                }`}></div>
-                <div className={`w-6 h-0.5 bg-current transition-all duration-300 ${
-                  isMenuOpen ? 'opacity-0' : ''
-                }`}></div>
-                <div className={`w-6 h-0.5 bg-current transition-all duration-300 ${
-                  isMenuOpen ? '-rotate-45 -translate-y-2' : ''
-                }`}></div>
-              </div>
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile Menu */}
-        <div className={`md:hidden bg-gray-800/95 backdrop-blur-lg border-t border-white/10 transition-all duration-300 overflow-hidden ${
-          isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-        }`}>
-          <div className="py-4 px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col space-y-1">
-              {navItems.map((item, index) => (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  className="text-gray-300 hover:text-white transition-all duration-300 font-medium py-3 px-4 rounded-lg hover:bg-white/5 hover:translate-x-2 flex items-center group"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  <span className="w-2 h-2 bg-cyan-400 rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-all duration-300"></span>
-                  {item.label}
-                </a>
-              ))}
-              <div className="pt-3 mt-2 border-t border-white/10">
-                <PrimaryButton 
-                  label="Get Started" 
-                  onClick={() => {
-                    onGetStarted();
-                    setIsMenuOpen(false);
-                  }}
-                  size="small"
-                  fullWidth
-                  className="hover:shadow-cyan-500/25"
-                />
-              </div>
-            </div>
           </div>
         </div>
       </nav>
 
-      {/* Overlay for mobile menu */}
+      
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-gray-900/95 backdrop-blur-lg border-t border-white/10 z-50 py-2 px-4">
+        <div className="flex justify-between items-center">
+          
+          {navItems.slice(0, 3).map((item) => (
+            <a
+              key={item.label}
+              href={item.href}
+              className="flex flex-col items-center text-gray-300 hover:text-cyan-400 transition-all duration-300 flex-1 py-1"
+            >
+              <span className="text-lg mb-1">{item.icon}</span>
+              <span className="text-xs font-medium">{item.label}</span>
+            </a>
+          ))}
+          
+          
+          <button 
+            className="flex flex-col items-center text-gray-300 hover:text-cyan-400 transition-all duration-300 flex-1 py-1"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            <span className="text-lg mb-1">⋯</span>
+            <span className="text-xs font-medium">More</span>
+          </button>
+
+         
+          <button 
+            className="flex flex-col items-center text-cyan-400 hover:text-cyan-300 transition-all duration-300 flex-1 py-1"
+            onClick={onGetStarted}
+          >
+            <span className="text-lg mb-1">🚀</span>
+            <span className="text-xs font-medium">Get Started</span>
+          </button>
+        </div>
+      </nav>
+
+      
+      {isMenuOpen && (
+        <div className="md:hidden fixed bottom-16 left-4 right-4 bg-gray-800/95 backdrop-blur-lg rounded-2xl border border-white/10 shadow-2xl z-40 p-4">
+          <div className="grid grid-cols-2 gap-3">
+            {navItems.slice(3).map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                className="flex items-center gap-3 text-gray-300 hover:text-white hover:bg-white/5 p-3 rounded-xl transition-all duration-300"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <span className="text-lg">{item.icon}</span>
+                <span className="font-medium">{item.label}</span>
+              </a>
+            ))}
+            <div className="flex items-center gap-3 text-gray-500 p-3 rounded-xl">
+              <span className="text-lg">👤</span>
+              <span className="font-medium">Profile</span>
+            </div>
+            <div className="flex items-center gap-3 text-gray-500 p-3 rounded-xl">
+              <span className="text-lg">⚙️</span>
+              <span className="font-medium">Settings</span>
+            </div>
+          </div>
+        </div>
+      )}
+
+      
       {isMenuOpen && (
         <div 
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden"
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-30 md:hidden"
           onClick={() => setIsMenuOpen(false)}
         />
       )}
+
+      
+      <div className="md:hidden pb-16"></div>
     </>
   );
 };
