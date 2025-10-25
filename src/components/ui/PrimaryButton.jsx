@@ -13,19 +13,19 @@ const PrimaryButton = ({
   ...props 
 }) => {
   const getButtonStyles = () => {
-    const baseStyles = "font-semibold rounded-xl transition-all duration-300 transform focus:outline-none focus:ring-4 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-none flex items-center justify-center gap-2";
+    const baseStyles = "font-semibold rounded-xl transition-all duration-300 transform focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-sm flex items-center justify-center gap-2 backdrop-blur-sm";
     
     const sizeStyles = {
-      small: "px-4 py-2 text-sm min-h-[40px]",
-      medium: "px-6 py-3 text-base min-h-[48px]", 
-      large: "px-8 py-4 text-lg min-h-[56px]"
+      small: "px-4 py-2 text-sm",
+      medium: "px-6 py-3 text-base", 
+      large: "px-8 py-4 text-lg"
     };
 
     const typeStyles = {
-      primary: "bg-gradient-to-r from-cyan-500 to-blue-600 text-white hover:shadow-2xl hover:scale-105 focus:ring-cyan-500/50 shadow-lg hover:from-cyan-600 hover:to-blue-700 active:scale-95",
-      secondary: "bg-gray-800 text-white border border-gray-600 hover:bg-gray-700 hover:shadow-xl hover:scale-105 focus:ring-gray-500/50 hover:border-gray-500 active:scale-95",
-      outline: "bg-transparent text-cyan-400 border-2 border-cyan-500 hover:bg-cyan-500 hover:text-white hover:shadow-xl hover:scale-105 focus:ring-cyan-500/50 active:scale-95",
-      ghost: "bg-transparent text-gray-300 hover:bg-gray-700 hover:text-white hover:shadow-lg focus:ring-gray-500/50 active:scale-95"
+      primary: "bg-gradient-to-r from-blue-800 to-blue-700 text-white hover:from-blue-900 hover:to-blue-800 focus:ring-blue-500 focus:ring-offset-white shadow-md hover:shadow-lg",
+      secondary: "bg-gradient-to-r from-gray-800 to-gray-700 text-white hover:from-gray-900 hover:to-gray-800 focus:ring-gray-500 focus:ring-offset-white shadow-md hover:shadow-lg",
+      outline: "bg-transparent text-blue-800 border-2 border-blue-800 hover:bg-gradient-to-r hover:from-blue-800 hover:to-blue-700 hover:text-white hover:border-transparent focus:ring-blue-500 focus:ring-offset-white hover:shadow-md",
+      ghost: "bg-transparent text-gray-600 hover:bg-gray-100/80 hover:text-gray-800 focus:ring-gray-500 focus:ring-offset-white hover:shadow-sm"
     };
 
     const widthStyle = fullWidth ? "w-full" : "";
@@ -60,7 +60,9 @@ const PrimaryButton = ({
       ) : (
         <>
           {icon && <span className="text-lg">{icon}</span>}
-          {label}
+          <span className="transform group-hover:scale-105 transition-transform duration-300">
+            {label}
+          </span>
         </>
       )}
     </button>
