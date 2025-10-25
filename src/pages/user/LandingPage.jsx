@@ -68,7 +68,7 @@ const LandingPage = ({ onExplore, onOrder }) => {
           
           {/* Main Heading */}
           <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6 leading-tight animate-fade-in">
-            Professional Notary Ofiice
+            Professional Notary Office
             <span className="block text-blue-800 mt-2 bg-gradient-to-r from-blue-800 to-blue-600 bg-clip-text text-transparent">
               Document & Transactions
             </span>
